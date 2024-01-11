@@ -15,20 +15,20 @@
 				VALUES(freeboard_seq.nextval, #{param1}, #{param2}, #{param3}, 0)
 	</insert>
 	
-	<insert id="contentDao" resultType="com.pjseok.mybatis.dto.MybatisDto">
+	<select id="contentDao" resultType="com.pjseok.mybatis.dto.MybatisDto">
 		SELECT * FROM freeboard WHERE fbnum = #{param1}
-	</insert>
+	</select>
 	
-	<insert id="modifyDao" resultType="int">
+	<update id="modifyDao">
 		UPDATE freeboard SET fbtitle=#{param1}, fbname=#{param2}, fbcontent=#{param3} WHERE fbnum=#{param4}
-	</insert>
+	</update>
 	
-	<insert id="searchDao" resultType = "com.pjseok.mybatis.dto.MybatisDto">
+	<select id="searchDao" resultType = "com.pjseok.mybatis.dto.MybatisDto">
 		SELECT * FROM freeboard WHERE fbtitle LIKE '%'||#{param1}||'%' OR fbcontent LIKE '%'||#{param1}||'%'
-	</insert>
+	</select>
 	
-	<insert id="deleteDao">
+	<delete id="deleteDao">
 		DELETE FROM freeboard WHERE fbnum=#{param1}
-	</insert>
+	</delete>
 	
 </mapper>
