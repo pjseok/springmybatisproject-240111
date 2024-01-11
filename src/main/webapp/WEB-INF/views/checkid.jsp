@@ -17,6 +17,7 @@
 	%>
 		<script type="text/javascript">
 			alert('입력하신 아이디는 이미 사용중인 아이디입니다. 다른 아이디를 입력해주세요');
+			history.go(-1);
 		</script>
 	<%
 	
