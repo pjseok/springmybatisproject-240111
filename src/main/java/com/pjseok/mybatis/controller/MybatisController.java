@@ -3,6 +3,7 @@ package com.pjseok.mybatis.controller;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.pjseok.mybatis.dao.MemberDao;
 import com.pjseok.mybatis.dao.MybatisDao;
 import com.pjseok.mybatis.dto.MybatisDto;
 
@@ -33,8 +35,24 @@ public class MybatisController {
 	}
 	
 	@RequestMapping(value = "/write_form")
-	public String write_form() {
-		return "write_form";
+	public String write_form(HttpSession session, Model model) {
+		
+		String sid = (String) session.getAttribute("sessionId");
+		MemberDao dao = sqlSession.getMapper(MemberDao.class);
+		
+		if(sid == null) { // 로그인 상태 여부 확인 -> 참이면 로그인하지 않은 상태
+			
+			return "redirect:login";
+			
+		} else { // 로그인된 상태
+			
+			model.addAttribute("memberDto", dao.CheckIdDao(sid));
+			
+			return "write_form";
+			
+		}
+		
+		
 	}
 	
 	@RequestMapping(value = "/write")
