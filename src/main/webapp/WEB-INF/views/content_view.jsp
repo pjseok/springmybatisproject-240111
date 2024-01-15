@@ -20,7 +20,7 @@
 		</tr>
 		<tr>
 			<th>작성자</th>
-			<td>${fboardDto.fbnam }</td>
+			<td>${fboardDto.fbnum }</td>
 		</tr>
 		<tr>
 			<th height="100">글내용</th>
